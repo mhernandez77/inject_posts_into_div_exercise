@@ -1,0 +1,37 @@
+<div id="container">
+    <!-- populated by JS--> </div>
+<!--dynamically change webpages & inject with JS-->
+<!--pushing diff layouts in to div container?-->
+
+<script>
+
+// <!--pick up froma  remote webserver, in the cloud & pick up JSON-->
+
+const url = "https://pollysnips.s3.amazonaws.com/posts.json";
+
+<!--render into the 'html', into the 'container', into the 'div'-->
+function renderPosts(posts) {
+    const len = posts.length; // posts is an array
+    var html = '';
+    for (let i = 0; i < len; i++) {
+        html += '<li class="post">' +
+            '<h2>' + posts[i].title + '</h2>' +
+            '<h3>' + posts[i].content + '</h3>'
+        slot.innerHTML = "Hello World"
+
+        const container = document.getElementById('container')
+        container.innerHTML = '<ul>' + html + '</ul>';
+    }
+    ;
+
+    // IN FETCH, Get data from remote url using fetch
+    async function getPosts(url) {
+
+        let response = await fetch(url);
+        let posts = await response.json();
+        renderPosts(posts);
+    }
+
+    getPosts(url);
+}
+</script>

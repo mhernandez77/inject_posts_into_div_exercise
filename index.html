@@ -1,0 +1,65 @@
+<div id="container">
+    <!-- populated by JS--> </div>
+<!--dynamically change webpages & inject with JS-->
+<!--pushing diff layouts in to div container?-->
+
+<!--get POSTS from array of objects from local file-->
+<script src="./posts.js"></script>
+
+<script>
+// <!--    Hello world is the 1st ex-->
+    // const html = '<h1> Hello World </h1>'
+//Can clean up code by creating a fxn
+function renderPosts(posts, container) {
+    const len = posts.length; // posts is an array-->
+    var html = '';
+    // loop over the posts
+    for (let i = 0; i < len; i++) {
+        //'html' = in a list in html
+        //assign class=post
+        html += '<li class="post">' +
+            //in H2, put title
+            '<h2>' + posts[i].title + '</h2>' +
+            //in H3, put content
+            '<h3>' + posts[i].content + '</h3>'
+    }
+//       NOW, HTML is going to be a long list of 19 & 21
+
+    //get handle of container from line 1 in the DOM
+    //    The variable is deleted when we enter renderPost fxn and call it on line 33
+    // const container = document.getElementById('container');
+    //Now, the HTML can be set
+    container.innerHTML = '<ul id="posts">' + html + '</ul>';
+}
+//Now, we call the renderPost fxn
+renderPosts(posts, document.getElementById('container'));
+</script>
+
+<!--<script>-->
+
+<!--pick up froma  remote webserver, in the cloud & pick up JSON-->
+
+<!--    const url = "https://pollysnips.s3.amazonaws.com/posts.json";-->
+
+<!--render into the 'html', into the 'container', into the 'div'-->
+<!--    function renderPosts(posts) {-->
+<!--        const len = posts.length; // posts is an array-->
+<!--        var html = '';-->
+<!--        for (let i = 0; i < len; i++) {-->
+<!--            html += '<li class="post">' +-->
+<!--                '<h2>' + posts[i].title + '</h2>' +-->
+<!--                '<h3>' + posts[i].content + '</h3>'-->
+<!--slot.innerHTML = "Hello World"
+
+        const container = document.getElementById('container')
+        container.innerHTML = '<ul>' + html + '</ul>';
+    };
+    // IN FETCH, Get data from remote url using fetch
+    async function getPosts(url) {
+
+        let response = await fetch(url);
+        let posts = await response.json();
+        renderPosts(posts);
+    }
+    getPosts(url);
+</script>
